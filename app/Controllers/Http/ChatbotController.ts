@@ -13,15 +13,13 @@ export default class ChatbotController {
         apiKey: process.env.OPENAI_API_KEY,
       });
       const openai = new OpenAIApi(configuration);
-      const chatGptResponse = await openai.createCompletion({
-        model: "davinci",
-        prompt: userMessage,
-        max_tokens: 100,
-        temperature: 0.8,
+      const chatGptResponse = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: userMessage }],
       });
 
       const chatbotMessage =
-        chatGptResponse.data?.choices[0]?.text?.trim() ?? "Fa iled response.";
+        chatGptResponse.data?.choices[0]?.message ?? "Failed response.";
       return response.status(200).send({ message: chatbotMessage });
     } catch (error) {
       console.error(error);

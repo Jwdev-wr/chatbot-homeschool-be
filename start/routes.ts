@@ -31,3 +31,8 @@ Route.post("/chatbot/send-message", "ChatbotController.sendMessage").middleware(
 Route.post("/register", "UserController.register");
 Route.post("/login", "UserController.login");
 Route.post("/logout", "UserController.logout").middleware("auth");
+
+Route.post(
+  "/generate-worksheet",
+  "WorksheetController.generateWorksheet"
+).middleware("auth");
